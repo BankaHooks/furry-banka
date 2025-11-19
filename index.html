@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FurLodge | Логово Фурри-Арта</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Анимированный радужный хедер -->
+<header class="rainbow-header">
+    <h1>🦊 FurLodge 🐾</h1>
+    <p>Твое логово с лучшим фурри-контентом</p>
+</header>
+
+<!-- Панель фильтров -->
+<nav class="filters">
+    <button class="filter-btn active" data-filter="all">Всё</button>
+    <button class="filter-btn" data-filter="image">Фотки</button>
+    <button class="filter-btn" data-filter="video">Видосы</button>
+</nav>
+
+<!-- Основная галерея -->
+<main class="gallery" id="gallery">
+    <!-- Контент будет загружен через JS -->
+    <div class="loader">Загружаем вашу дозу пушистости...</div>
+</main>
+
+<!-- Модальное окно для просмотра -->
+<div class="modal" id="modal">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <div class="modal-content">
+        <img id="modalImage" src="" alt="" style="display: none;">
+        <video id="modalVideo" controls style="display: none;"></video>
+    </div>
+</div>
+
+<!-- Подвал -->
+<footer>
+    <p>Сделано с ❤️ и большим количеством шерсти | <a href="https://github.com/your-username/fur-lodge" target="_blank">GitHub</a></p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
