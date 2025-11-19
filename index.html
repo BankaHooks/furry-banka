@@ -3,43 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FurLodge | Логово Фурри-Арта</title>
+    <title>ShadowGrove | Тайное логово фуррей</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<!-- Анимированный радужный хедер -->
-<header class="rainbow-header">
-    <h1>🦊 FurLodge 🐾</h1>
-    <p>Твое логово с лучшим фурри-контентом</p>
-</header>
-
-<!-- Панель фильтров -->
-<nav class="filters">
-    <button class="filter-btn active" data-filter="all">Всё</button>
-    <button class="filter-btn" data-filter="image">Фотки</button>
-    <button class="filter-btn" data-filter="video">Видосы</button>
-</nav>
-
-<!-- Основная галерея -->
-<main class="gallery" id="gallery">
-    <!-- Контент будет загружен через JS -->
-    <div class="loader">Загружаем вашу дозу пушистости...</div>
-</main>
-
-<!-- Модальное окно для просмотра -->
-<div class="modal" id="modal">
-    <span class="close-btn" id="closeModal">&times;</span>
-    <div class="modal-content">
-        <img id="modalImage" src="" alt="" style="display: none;">
-        <video id="modalVideo" controls style="display: none;"></video>
+<!-- Прелоадер с папоротниками -->
+<div id="fernPreloader" class="fern-preloader">
+    <div class="ferns-container">
+        <div class="fern fern-left"></div>
+        <div class="fern fern-right"></div>
+        <div class="fern fern-top"></div>
+        <div class="mystic-title">
+            <h1>ShadowGrove</h1>
+            <p>Тайное логово фуррей</p>
+        </div>
     </div>
 </div>
 
-<!-- Подвал -->
-<footer>
-    <p>Сделано с ❤️ и большим количеством шерсти | <a href="https://github.com/your-username/fur-lodge" target="_blank">GitHub</a></p>
-</footer>
+<!-- Основной контент -->
+<div id="mainContent" class="main-content hidden">
+    <!-- Фон с частицами -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Хедер -->
+    <header class="dark-header">
+        <div class="header-content">
+            <h1 class="glowing-text">🌑 ShadowGrove 🐺</h1>
+            <p class="tagline">Где тени обретают форму, а мечты становятся реальностью</p>
+            <div class="moon-phase">🌙 Полнолуние</div>
+        </div>
+    </header>
+
+    <!-- Навигация -->
+    <nav class="shadow-nav">
+        <div class="nav-container">
+            <button class="nav-btn active" data-section="gallery">
+                <span class="btn-icon">👁️</span>
+                Видения
+            </button>
+            <button class="nav-btn" data-section="upload">
+                <span class="btn-icon">🕯️</span>
+                Призвать
+            </button>
+            <button class="nav-btn" data-section="community">
+                <span class="btn-icon">👥</span>
+                Клан
+            </button>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="shadow-main">
+        <!-- Галерея -->
+        <section id="gallery" class="content-section active">
+            <div class="section-header">
+                <h2>🕸️ Тени искусства</h2>
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="all">Все тени</button>
+                    <button class="filter-btn" data-filter="dark">Темные</button>
+                    <button class="filter-btn" data-filter="mystic">Мистические</button>
+                    <button class="filter-btn" data-filter="nocturnal">Ночные</button>
+                </div>
+            </div>
+
+            <div class="gallery" id="galleryContainer">
+                <!-- Галерея будет заполнена через JS -->
+            </div>
+        </section>
+
+        <!-- Загрузка -->
+        <section id="upload" class="content-section">
+            <div class="upload-container">
+                <h2>🕯️ Призвать новое видение</h2>
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">🌌</div>
+                    <p>Брось сюда свой свиток с изображением</p>
+                    <small>Только для посвященных: PNG, JPG, WEBP</small>
+                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                </div>
+                <div class="upload-form">
+                    <input type="text" id="artTitle" placeholder="Имя видения..." class="text-input">
+                    <select id="artCategory" class="select-input">
+                        <option value="dark">Темное искусство</option>
+                        <option value="mystic">Мистическое</option>
+                        <option value="nocturnal">Ночной дух</option>
+                    </select>
+                    <textarea id="artDescription" placeholder="Описание магии..." class="text-area"></textarea>
+                    <button id="submitArt" class="submit-btn">
+                        <span>✨</span>
+                        Совершить ритуал
+                        <span>✨</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Сообщество -->
+        <section id="community" class="content-section">
+            <div class="community-container">
+                <h2>🏰 Зал клана</h2>
+                <div class="community-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">🐺</div>
+                        <h3>666</h3>
+                        <p>Духов в логове</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🕸️</div>
+                        <h3>999+</h3>
+                        <p>Теней в архивах</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🌙</div>
+                        <h3>13</h3>
+                        <p>Лунных циклов</p>
+                    </div>
+                </div>
+
+                <div class="community-rules">
+                    <h3>📜 Законы тени</h3>
+                    <ul>
+                        <li>🕯️ Уважай чужие видения</li>
+                        <li>🌑 Храни тайны логова</li>
+                        <li>🐺 Защищай свой клан</li>
+                        <li>🔮 Делись магией знаний</li>
+                        <li>💀 Не предавай доверие</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="modal">
+        <span class="close-btn" id="closeModal">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="" style="display: none;">
+            <div class="modal-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalDescription"></p>
+                <div class="modal-meta">
+                    <span id="modalAuthor"></span>
+                    <span id="modalDate"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="shadow-footer">
+        <div class="footer-content">
+            <p>Создано в лунном свете для избранных | ShadowGrove © 2024</p>
+            <div class="social-links">
+                <a href="#" class="social-link">Telegram</a>
+                <a href="#" class="social-link">Discord</a>
+                <a href="#" class="social-link">Coven</a>
+            </div>
+        </div>
+    </footer>
+</div>
 
 <script src="script.js"></script>
 </body>
