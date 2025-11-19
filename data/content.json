@@ -1,0 +1,34 @@
+{
+  "gallery": [
+    {
+      "id": 1,
+      "type": "dark",
+      "url": "assets/images/wolf1.jpg",
+      "title": "Теневой волк",
+      "description": "Дух ночного леса, хранитель древних секретов",
+      "author": "MoonHunter",
+      "date": "Ночь кровавой луны",
+      "likes": 128
+    },
+    {
+      "id": 2,
+      "type": "mystic",
+      "url": "assets/images/mystic1.jpg",
+      "title": "Пророческий сон",
+      "description": "Видение, пришедшее в лунную ночь",
+      "author": "DreamWeaver",
+      "date": "Время серебряных снов",
+      "likes": 95
+    },
+    {
+      "id": 3,
+      "type": "nocturnal",
+      "url": "assets/images/nocturnal1.jpg",
+      "title": "Танец теней",
+      "description": "Ритуальный танец под покровом тьмы",
+      "author": "ShadowDancer",
+      "date": "Сумерки древних",
+      "likes": 156
+    }
+  ]
+}

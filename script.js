@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Элементы DOM
-    const fernPreloader = document.getElementById('fernPreloader');
-    const mainContent = document.getElementById('mainContent');
     const galleryContainer = document.getElementById('galleryContainer');
     const modal = document.getElementById('modal');
     const modalImage = document.getElementById('modalImage');
@@ -12,62 +10,69 @@ document.addEventListener('DOMContentLoaded', function() {
     const uploadArea = document.getElementById('uploadArea');
     const fileInput = document.getElementById('fileInput');
     const submitBtn = document.getElementById('submitArt');
+    const joinRitualBtn = document.querySelector('.join-ritual-btn');
 
-    // Данные галереи с реальными изображениями
+    // Данные галереи с локальными изображениями
     let galleryData = [
         {
             id: 1,
             type: 'dark',
-            url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop',
-            title: 'Теневой волк',
-            description: 'Дух ночного леса, хранитель древних секретов',
+            url: 'assets/images/dark1.jpg',
+            title: 'Дружеская посиделка',
+            description: 'Голландский штурвал',
             author: 'MoonHunter',
-            date: 'Ночь кровавой луны'
+            date: 'Ночь кровавой луны',
+            likes: 128
         },
         {
             id: 2,
             type: 'mystic',
-            url: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop',
-            title: 'Пророческий сон',
-            description: 'Видение, пришедшее в лунную ночь',
+            url: 'assets/images/dark2.jpg',
+            title: 'Лесная перепалка',
+            description: 'Хуй сосалка',
             author: 'DreamWeaver',
-            date: 'Время серебряных снов'
+            date: 'Время серебряных снов',
+            likes: 95
         },
         {
             id: 3,
             type: 'nocturnal',
-            url: 'https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?w=400&h=400&fit=crop',
-            title: 'Танец теней',
-            description: 'Ритуальный танец под покровом тьмы',
+            url: 'assets/images/dark3.jpg',
+            title: 'Создатель сайта',
+            description: 'Это не фейк',
             author: 'ShadowDancer',
-            date: 'Сумерки древних'
+            date: 'Сумерки древних',
+            likes: 156
         },
         {
             id: 4,
             type: 'dark',
-            url: 'https://images.unsplash.com/photo-1543852786-1cf6624b9987?w=400&h=400&fit=crop',
-            title: 'Охотник в ночи',
-            description: 'Одинокий страж темного леса',
+            url: 'assets/images/wolf1.jpg',
+            title: 'Посиделка в баре',
+            description: 'Это пиздец',
             author: 'NightStalker',
-            date: 'Час теней'
+            date: 'Час теней',
+            likes: 87
         },
         {
             id: 5,
             type: 'mystic',
-            url: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=400&h=400&fit=crop',
+            url: 'assets/images/ruini1.jpg',
             title: 'Хранитель руин',
-            description: 'Древний дух забытых мест',
+            description: 'Сидит на помойке',
             author: 'RuinKeeper',
-            date: 'Эпоха забытия'
+            date: 'Эпоха забытия',
+            likes: 112
         },
         {
             id: 6,
             type: 'nocturnal',
-            url: 'https://images.unsplash.com/photo-1574870111867-089730e5a72b?w=400&h=400&fit=crop',
+            url: 'assets/images/luna1.jpg',
             title: 'Лунный призыв',
-            description: 'Магия, рожденная под светом луны',
+            description: 'дай бог ей здоровья',
             author: 'MoonCaller',
-            date: 'Зов ночи'
+            date: 'Зов ночи',
+            likes: 203
         }
     ];
 
@@ -77,74 +82,41 @@ document.addEventListener('DOMContentLoaded', function() {
     init();
 
     function init() {
-        initParticles();
-        startFernAnimation();
+        initHoverEffects();
         setupEventListeners();
+        setupImageErrorHandling();
         loadGallery();
-    }
+        startCountdown();
 
-    function startFernAnimation() {
-        // Анимация папоротников длится 2 секунды, потом показываем основной контент
+        // Показываем уведомление о загрузке
         setTimeout(() => {
-            fernPreloader.style.opacity = '0';
-            setTimeout(() => {
-                fernPreloader.style.display = 'none';
-                mainContent.classList.remove('hidden');
-            }, 1000);
-        }, 2000);
+            showMagicAlert('Логово теней пробуждается... 🌑', 'info');
+        }, 1000);
     }
 
-    function initParticles() {
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
+    function initHoverEffects() {
+        document.addEventListener('mousemove', (e) => {
+            const effects = document.querySelectorAll('.effect');
+            if (effects[0]) {
+                effects[0].style.left = e.clientX + 'px';
+                effects[0].style.top = e.clientY + 'px';
+                effects[0].style.opacity = '0.3';
 
-        // Устанавливаем размер canvas
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+                setTimeout(() => {
+                    effects[0].style.opacity = '0';
+                }, 500);
+            }
+        });
+    }
 
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        // Создаем частицы
-        const particles = [];
-        const particleCount = 30;
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                size: Math.random() * 2 + 1,
-                speedX: (Math.random() - 0.5) * 0.3,
-                speedY: (Math.random() - 0.5) * 0.3,
-                color: `rgba(139, 92, 246, ${Math.random() * 0.3 + 0.1})`
-            });
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach(particle => {
-                // Обновляем позицию
-                particle.x += particle.speedX;
-                particle.y += particle.speedY;
-
-                // Возвращаем частицы на canvas
-                if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
-                if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
-
-                // Рисуем частицу
-                ctx.beginPath();
-                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                ctx.fillStyle = particle.color;
-                ctx.fill();
-            });
-
-            requestAnimationFrame(animateParticles);
-        }
-
-        animateParticles();
+    function setupImageErrorHandling() {
+        document.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IMG' && e.target.classList.contains('gallery-img')) {
+                console.warn('Ошибка загрузки изображения:', e.target.src);
+                e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMkQyRDJEIi8+CjxwYXRoIGQ9Ik0yMDAgMTIwQzE2MS4zIDEyMCAxMzAgMTUxLjMgMTMwIDE5MEMxMzAgMjI4LjcgMTYxLjMgMjYwIDIwMCAyNjBDMjM4LjcgMjYwIDI3MCAyMjguNyAyNzAgMTkwQzI3MCAxNTEuMyAyMzguNyAxMjAgMjAwIDEyMFoiIGZpbGw9IiM4QjVDRjYiLz4KPHBhdGggZD0iTTE0MCAzMjBIMTYwTDIwMCAyNDBMMjQwIDMyMEgyNjBMMjEwIDIyMEwxOTAgMjIwTDE0MCAzMjBaIiBmaWxsPSIjOEI1Q0Y2Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMzUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2Ij7QmNC30LLQtdC90LjRjyDQvdC10L7QutC70Y7Rh9C40LrQuDwvdGV4dD4KPC9zdmc+';
+                e.target.alt = 'Изображение не загружено';
+            }
+        }, true);
     }
 
     function loadGallery() {
@@ -158,9 +130,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderGallery(items) {
         if (items.length === 0) {
             galleryContainer.innerHTML = `
-                <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-                    <h3 style="color: #8b5cf6; margin-bottom: 1rem;">🌑 Безмолвие</h3>
-                    <p>Тени еще не проявились... Будь первым, кто призовет видение!</p>
+                <div style="grid-column: 1/-1; text-align: center; padding: 4rem;">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🌑</div>
+                    <h3 style="color: #8b5cf6; margin-bottom: 1rem; font-size: 2rem;">Безмолвие</h3>
+                    <p style="font-size: 1.2rem; opacity: 0.8;">Тени еще не проявились... Будь первым, кто призовет видение!</p>
                 </div>
             `;
             return;
@@ -168,13 +141,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         galleryContainer.innerHTML = items.map(item => `
             <div class="gallery-item" data-id="${item.id}">
-                <img src="${item.url}" alt="${item.title}" loading="lazy">
+                <img src="${item.url}" alt="${item.title}" class="gallery-img" loading="lazy">
                 <div class="item-info">
-                    <h4 style="color: #8b5cf6;">${item.title}</h4>
-                    <p style="font-size: 0.9rem; margin: 0.5rem 0;">${item.description}</p>
-                    <div style="font-size: 0.8rem; opacity: 0.7;">
-                        <span>by ${item.author}</span> |
-                        <span>${item.date}</span>
+                    <h4 style="color: #8b5cf6; font-size: 1.3rem; margin-bottom: 0.5rem;">${item.title}</h4>
+                    <p style="font-size: 1rem; margin-bottom: 1rem; opacity: 0.9;">${item.description}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; opacity: 0.7;">
+                        <span><i class="fas fa-user"></i> ${item.author}</span>
+                        <span><i class="fas fa-heart"></i> ${item.likes}</span>
+                        <span><i class="fas fa-calendar"></i> ${item.date}</span>
                     </div>
                 </div>
             </div>
@@ -185,7 +159,9 @@ document.addEventListener('DOMContentLoaded', function() {
             item.addEventListener('click', () => {
                 const itemId = parseInt(item.dataset.id);
                 const galleryItem = galleryData.find(i => i.id === itemId);
-                openModal(galleryItem);
+                if (galleryItem) {
+                    openModal(galleryItem);
+                }
             });
         });
     }
@@ -201,8 +177,17 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('modalAuthor').textContent = `Призвал: ${item.author}`;
         document.getElementById('modalDate').textContent = `В ночь: ${item.date}`;
 
+        // Обновляем количество лайков
+        const likeBtn = document.querySelector('.action-btn .fa-heart')?.parentNode;
+        if (likeBtn) {
+            likeBtn.innerHTML = `<i class="fas fa-heart"></i> ${item.likes}`;
+        }
+
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
+
+        // Добавляем анимацию появления
+        modal.style.animation = 'fadeInUp 0.5s ease';
     }
 
     function setupEventListeners() {
@@ -212,11 +197,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const filter = btn.dataset.filter;
                 currentFilter = filter;
 
-                // Обновляем активную кнопку
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                // Фильтруем галерею
                 loadGallery();
             });
         });
@@ -226,13 +209,14 @@ document.addEventListener('DOMContentLoaded', function() {
             btn.addEventListener('click', () => {
                 const section = btn.dataset.section;
 
-                // Обновляем активную кнопку
                 navBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                // Показываем нужную секцию
                 contentSections.forEach(s => s.classList.remove('active'));
-                document.getElementById(section).classList.add('active');
+                const targetSection = document.getElementById(section);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
             });
         });
 
@@ -244,21 +228,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Загрузка файлов
         uploadArea.addEventListener('click', () => fileInput.click());
+
         uploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
             uploadArea.style.borderColor = '#8b5cf6';
-            uploadArea.style.background = 'rgba(139, 92, 246, 0.1)';
+            uploadArea.style.background = 'rgba(139, 92, 246, 0.15)';
+            uploadArea.style.transform = 'scale(1.02)';
         });
 
         uploadArea.addEventListener('dragleave', () => {
             uploadArea.style.borderColor = 'rgba(139, 92, 246, 0.5)';
-            uploadArea.style.background = 'transparent';
+            uploadArea.style.background = 'rgba(139, 92, 246, 0.05)';
+            uploadArea.style.transform = 'scale(1)';
         });
 
         uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
             uploadArea.style.borderColor = 'rgba(139, 92, 246, 0.5)';
-            uploadArea.style.background = 'transparent';
+            uploadArea.style.background = 'rgba(139, 92, 246, 0.05)';
+            uploadArea.style.transform = 'scale(1)';
 
             const files = e.dataTransfer.files;
             handleFiles(files);
@@ -271,6 +259,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
         submitBtn.addEventListener('click', handleArtSubmit);
 
+        if (joinRitualBtn) {
+            joinRitualBtn.addEventListener('click', handleJoinRitual);
+        }
+
+        // Действия в модальном окне
+        document.querySelectorAll('.action-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const icon = this.querySelector('i');
+
+                if (icon.classList.contains('fa-heart')) {
+                    // Анимация лайка
+                    this.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 300);
+                }
+            });
+        });
+
         // Закрытие по Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modal.style.display === 'block') {
@@ -280,8 +288,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function closeModalHandler() {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        modal.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }, 300);
     }
 
     function handleFiles(files) {
@@ -291,14 +302,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     uploadArea.innerHTML = `
-                        <img src="${e.target.result}" style="max-width: 200px; max-height: 200px; border-radius: 10px; border: 2px solid #8b5cf6;">
-                        <p style="margin-top: 1rem;">${file.name}</p>
-                        <small>Видение готово к призыву!</small>
+                        <div style="text-align: center;">
+                            <img src="${e.target.result}" style="max-width: 200px; max-height: 200px; border-radius: 15px; border: 2px solid #8b5cf6; margin-bottom: 1rem;">
+                            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">${file.name}</p>
+                            <small style="color: #10b981;">Видение готово к призыву! ✨</small>
+                        </div>
                     `;
                 };
                 reader.readAsDataURL(file);
             } else {
-                alert('Только изображения могут быть призваны в наше логово!');
+                showMagicAlert('Только изображения могут быть призваны в наше логово!', 'error');
             }
         }
     }
@@ -309,20 +322,163 @@ document.addEventListener('DOMContentLoaded', function() {
         const description = document.getElementById('artDescription').value;
 
         if (!title) {
-            alert('Твое видение должно иметь имя!');
+            showMagicAlert('Твое видение должно иметь имя!', 'warning');
             return;
         }
 
-        // В реальном приложении здесь был бы AJAX запрос
-        alert(`Видение "${title}" успешно призвано в логово! 🌙\n\nСила твоего искусства пополнила archives теней.`);
+        // Анимация кнопки
+        submitBtn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            submitBtn.style.transform = 'scale(1)';
+        }, 150);
+
+        // Создаем новый элемент галереи
+        const newArt = {
+            id: galleryData.length + 1,
+            type: category,
+            url: uploadArea.querySelector('img')?.src || 'assets/images/dark1.jpg',
+            title: title,
+            description: description || 'Без описания...',
+            author: 'Ты',
+            date: getCurrentMoonDate(),
+            likes: 0
+        };
+
+        galleryData.unshift(newArt);
+
+        showMagicAlert(`Видение "${title}" успешно призвано в логово! 🌙\n\nСила твоего искусства пополнила archives теней.`, 'success');
+
+        // Переключаемся на галерею и обновляем
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            if (btn.dataset.section === 'gallery') {
+                btn.click();
+            }
+        });
 
         // Сбрасываем форму
         document.getElementById('artTitle').value = '';
         document.getElementById('artDescription').value = '';
         uploadArea.innerHTML = `
-            <div class="upload-icon">🌌</div>
+            <div class="upload-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
             <p>Брось сюда свой свиток с изображением</p>
             <small>Только для посвященных: PNG, JPG, WEBP</small>
         `;
     }
+
+    function getCurrentMoonDate() {
+        const phases = ['Новолуние', 'Растущая луна', 'Полнолуние', 'Убывающая луна'];
+        const times = ['Полночь', 'Рассвет', 'Закат', 'Сумерки'];
+        return `${phases[Math.floor(Math.random() * phases.length)]}, ${times[Math.floor(Math.random() * times.length)]}`;
+    }
+
+    function handleJoinRitual() {
+        showMagicAlert('Ты присоединился к ритуалу Призыва Теней! 🔮\n\nТвоя энергия усиливает магию логова.', 'success');
+
+        // Анимация кнопки
+        joinRitualBtn.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            joinRitualBtn.style.transform = 'scale(1)';
+        }, 150);
+    }
+
+    function showMagicAlert(message, type = 'info') {
+        const alertDiv = document.createElement('div');
+        const colors = {
+            success: '#10b981',
+            error: '#ef4444',
+            warning: '#f59e0b',
+            info: '#8b5cf6'
+        };
+
+        alertDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid ${colors[type]};
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+            color: white;
+            z-index: 10000;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            max-width: 400px;
+            border-left: 5px solid ${colors[type]};
+        `;
+
+        alertDiv.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="font-size: 1.5rem;">
+                    ${type === 'success' ? '✨' : type === 'error' ? '❌' : type === 'warning' ? '⚠️' : '🔮'}
+                </div>
+                <div>
+                    <div style="font-weight: bold; margin-bottom: 0.5rem; color: ${colors[type]};">${type === 'success' ? 'Успех!' : type === 'error' ? 'Ошибка!' : type === 'warning' ? 'Внимание!' : 'Информация'}</div>
+                    <div style="line-height: 1.4;">${message}</div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(alertDiv);
+
+        // Анимация появления
+        setTimeout(() => {
+            alertDiv.style.transform = 'translateX(0)';
+        }, 100);
+
+        // Автоматическое скрытие
+        setTimeout(() => {
+            alertDiv.style.transform = 'translateX(400px)';
+            setTimeout(() => {
+                if (alertDiv.parentNode) {
+                    alertDiv.parentNode.removeChild(alertDiv);
+                }
+            }, 300);
+        }, 5000);
+    }
+
+    function startCountdown() {
+        const countdownElement = document.querySelector('.countdown');
+        if (!countdownElement) return;
+
+        let days = 3;
+
+        const interval = setInterval(() => {
+            if (days > 0) {
+                days--;
+                countdownElement.textContent = `${days} лунную ночь`;
+
+                // Обновляем прогресс
+                const progress = document.querySelectorAll('.progress-bar');
+                if (progress[1]) {
+                    progress[1].style.width = `${85 - (days * 28)}%`;
+                }
+            } else {
+                clearInterval(interval);
+                countdownElement.textContent = 'сегодня ночью!';
+                showMagicAlert('Ритуал Призыва Теней завершается сегодня! Присоединяйся! 🌕', 'warning');
+            }
+        }, 5000); // Каждые 5 секунд для демонстрации
+    }
+
+    // Добавляем CSS для анимации исчезновения
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .gallery-img {
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+    `;
+    document.head.appendChild(style);
 });

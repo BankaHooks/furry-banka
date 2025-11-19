@@ -3,165 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShadowGrove | Тайное логово фуррей</title>
+    <title>FurryLoveZOV| Тайное логово фуррей</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-<!-- Прелоадер с папоротниками -->
-<div id="fernPreloader" class="fern-preloader">
-    <div class="ferns-container">
-        <div class="fern fern-left"></div>
-        <div class="fern fern-right"></div>
-        <div class="fern fern-top"></div>
-        <div class="mystic-title">
-            <h1>ShadowGrove</h1>
-            <p>Тайное логово фуррей</p>
-        </div>
+<!-- Анимированный фон -->
+<div class="animated-bg">
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
     </div>
 </div>
 
+<!-- Хедер -->
+<header class="dark-header">
+    <div class="header-content">
+        <h1 class="glowing-text">
+            <span class="pulse">🌑</span>
+            Furry-Love ZV
+            <span class="pulse">🐺</span>
+        </h1>
+        <p class="tagline">Где тени обретают форму, а мечты становятся реальностью</p>
+        <div class="moon-phase">
+            <i class="fas fa-moon"></i>
+            <span>Полнолуние</span>
+        </div>
+    </div>
+</header>
+
+<!-- Внешние ссылки -->
+<div class="external-links">
+    <a href="https://bankahooks.github.io/" class="external-link" target="_blank">
+        <i class="fas fa-home"></i>
+        Главный сайт
+    </a>
+    <a href="https://contract.gosuslugi.ru/" class="external-link" target="_blank">
+        <i class="fas fa-file-contract"></i>
+        NSFW
+    </a>
+</div>
+
+<!-- Навигация -->
+<nav class="shadow-nav">
+    <div class="nav-container">
+        <button class="nav-btn active" data-section="gallery">
+            <i class="fas fa-eye"></i>
+            Видения
+        </button>
+        <button class="nav-btn" data-section="upload">
+            <i class="fas fa-hand-sparkles"></i>
+            Призвать
+        </button>
+        <button class="nav-btn" data-section="rituals">
+            <i class="fas fa-magic"></i>
+            Ритуалы
+        </button>
+    </div>
+</nav>
+
 <!-- Основной контент -->
-<div id="mainContent" class="main-content hidden">
-    <!-- Фон с частицами -->
-    <canvas id="particleCanvas"></canvas>
-
-    <!-- Хедер -->
-    <header class="dark-header">
-        <div class="header-content">
-            <h1 class="glowing-text">🌑 ShadowGrove 🐺</h1>
-            <p class="tagline">Где тени обретают форму, а мечты становятся реальностью</p>
-            <div class="moon-phase">🌙 Полнолуние</div>
-        </div>
-    </header>
-
-    <!-- Навигация -->
-    <nav class="shadow-nav">
-        <div class="nav-container">
-            <button class="nav-btn active" data-section="gallery">
-                <span class="btn-icon">👁️</span>
-                Видения
-            </button>
-            <button class="nav-btn" data-section="upload">
-                <span class="btn-icon">🕯️</span>
-                Призвать
-            </button>
-            <button class="nav-btn" data-section="community">
-                <span class="btn-icon">👥</span>
-                Клан
-            </button>
-        </div>
-    </nav>
-
-    <!-- Основной контент -->
-    <main class="shadow-main">
-        <!-- Галерея -->
-        <section id="gallery" class="content-section active">
-            <div class="section-header">
-                <h2>🕸️ Тени искусства</h2>
-                <div class="filters">
-                    <button class="filter-btn active" data-filter="all">Все тени</button>
-                    <button class="filter-btn" data-filter="dark">Темные</button>
-                    <button class="filter-btn" data-filter="mystic">Мистические</button>
-                    <button class="filter-btn" data-filter="nocturnal">Ночные</button>
-                </div>
+<main class="shadow-main">
+    <!-- Галерея -->
+    <section id="gallery" class="content-section active">
+        <div class="section-header">
+            <h2><i class="fas fa-ghost"></i> Тени искусства</h2>
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">
+                    <i class="fas fa-star"></i>
+                    Все тени
+                </button>
+                <button class="filter-btn" data-filter="dark">
+                    <i class="fas fa-moon"></i>
+                    Темные
+                </button>
+                <button class="filter-btn" data-filter="mystic">
+                    <i class="fas fa-crystal-ball"></i>
+                    Мистические
+                </button>
+                <button class="filter-btn" data-filter="nocturnal">
+                    <i class="fas fa-cloud-moon"></i>
+                    Ночные
+                </button>
             </div>
+        </div>
 
-            <div class="gallery" id="galleryContainer">
-                <!-- Галерея будет заполнена через JS -->
-            </div>
-        </section>
+        <div class="gallery" id="galleryContainer">
+            <!-- Галерея будет заполнена через JS -->
+        </div>
+    </section>
 
-        <!-- Загрузка -->
-        <section id="upload" class="content-section">
-            <div class="upload-container">
-                <h2>🕯️ Призвать новое видение</h2>
+    <!-- Загрузка -->
+    <section id="upload" class="content-section">
+        <div class="upload-container">
+            <div class="ritual-circle">
+                <div class="circle-glow"></div>
+                <h2><i class="fas fa-scroll"></i> Призвать новое видение</h2>
                 <div class="upload-area" id="uploadArea">
-                    <div class="upload-icon">🌌</div>
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
                     <p>Брось сюда свой свиток с изображением</p>
                     <small>Только для посвященных: PNG, JPG, WEBP</small>
                     <input type="file" id="fileInput" accept="image/*" style="display: none;">
                 </div>
                 <div class="upload-form">
-                    <input type="text" id="artTitle" placeholder="Имя видения..." class="text-input">
-                    <select id="artCategory" class="select-input">
-                        <option value="dark">Темное искусство</option>
-                        <option value="mystic">Мистическое</option>
-                        <option value="nocturnal">Ночной дух</option>
-                    </select>
-                    <textarea id="artDescription" placeholder="Описание магии..." class="text-area"></textarea>
-                    <button id="submitArt" class="submit-btn">
-                        <span>✨</span>
+                    <div class="input-group">
+                        <i class="fas fa-pen"></i>
+                        <input type="text" id="artTitle" placeholder="Имя видения..." class="text-input">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-tags"></i>
+                        <select id="artCategory" class="select-input">
+                            <option value="dark">Темное искусство</option>
+                            <option value="mystic">Мистическое</option>
+                            <option value="nocturnal">Ночной дух</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-book"></i>
+                        <textarea id="artDescription" placeholder="Описание магии..." class="text-area"></textarea>
+                    </div>
+                    <button id="submitArt" class="submit-btn magic-btn">
+                        <i class="fas fa-hat-wizard"></i>
                         Совершить ритуал
-                        <span>✨</span>
+                        <div class="btn-sparkles">
+                            <span>✨</span>
+                            <span>✨</span>
+                            <span>✨</span>
+                        </div>
                     </button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Сообщество -->
-        <section id="community" class="content-section">
-            <div class="community-container">
-                <h2>🏰 Зал клана</h2>
-                <div class="community-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">🐺</div>
-                        <h3>666</h3>
-                        <p>Духов в логове</p>
+    <!-- Ритуалы -->
+    <section id="rituals" class="content-section">
+        <div class="rituals-container">
+            <h2><i class="fas fa-magic"></i> Лунные ритуалы</h2>
+
+            <div class="moon-calendar">
+                <div class="moon-phase-card">
+                    <div class="moon-icon pulse">
+                        <i class="fas fa-moon"></i>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🕸️</div>
-                        <h3>999+</h3>
-                        <p>Теней в архивах</p>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🌙</div>
-                        <h3>13</h3>
-                        <p>Лунных циклов</p>
+                    <h4>Новолуние</h4>
+                    <p>Время новых начинаний</p>
+                    <div class="ritual-progress">
+                        <div class="progress-bar" style="width: 30%"></div>
                     </div>
                 </div>
-
-                <div class="community-rules">
-                    <h3>📜 Законы тени</h3>
-                    <ul>
-                        <li>🕯️ Уважай чужие видения</li>
-                        <li>🌑 Храни тайны логова</li>
-                        <li>🐺 Защищай свой клан</li>
-                        <li>🔮 Делись магией знаний</li>
-                        <li>💀 Не предавай доверие</li>
-                    </ul>
+                <div class="moon-phase-card active">
+                    <div class="moon-icon pulse">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h4>Полнолуние</h4>
+                    <p>Сила на пике</p>
+                    <div class="ritual-progress">
+                        <div class="progress-bar" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="moon-phase-card">
+                    <div class="moon-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>Звездопад</h4>
+                    <p>Магия небес</p>
+                    <div class="ritual-progress">
+                        <div class="progress-bar" style="width: 15%"></div>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
 
-    <!-- Модальное окно -->
-    <div class="modal" id="modal">
-        <span class="close-btn" id="closeModal">&times;</span>
-        <div class="modal-content">
-            <img id="modalImage" src="" alt="" style="display: none;">
-            <div class="modal-info">
-                <h3 id="modalTitle"></h3>
-                <p id="modalDescription"></p>
-                <div class="modal-meta">
-                    <span id="modalAuthor"></span>
-                    <span id="modalDate"></span>
-                </div>
+            <div class="current-ritual">
+                <h3>Текущий ритуал: <span class="glowing-text">Призыв теней</span></h3>
+                <p>До завершения: <span class="countdown">3 лунные ночи</span></p>
+                <button class="join-ritual-btn">
+                    <i class="fas fa-hand-sparkles"></i>
+                    Присоединиться к ритуалу
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Модальное окно -->
+<div class="modal" id="modal">
+        <span class="close-btn" id="closeModal">
+            <i class="fas fa-times"></i>
+        </span>
+    <div class="modal-content">
+        <img id="modalImage" src="" alt="" style="display: none;">
+        <div class="modal-info">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDescription"></p>
+            <div class="modal-meta">
+                <span id="modalAuthor"></span>
+                <span id="modalDate"></span>
+            </div>
+            <div class="modal-actions">
+                <button class="action-btn">
+                    <i class="fas fa-heart"></i>
+                    128
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-share"></i>
+                    Поделиться
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-download"></i>
+                    Сохранить
+                </button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Футер -->
-    <footer class="shadow-footer">
-        <div class="footer-content">
-            <p>Создано в лунном свете для избранных | ShadowGrove © 2024</p>
-            <div class="social-links">
-                <a href="#" class="social-link">Telegram</a>
-                <a href="#" class="social-link">Discord</a>
-                <a href="#" class="social-link">Coven</a>
-            </div>
+<!-- Футер -->
+<footer class="shadow-footer">
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="https://bankahooks.github.io/" class="footer-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i>
+                Основной проект
+            </a>
+            <a href="https://contract.gosuslugi.ru/" class="footer-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i>
+                NSFW
+            </a>
         </div>
-    </footer>
+        <p>Создано в пьяном угаре | BankaHooks © 2025</p>
+        <div class="social-links">
+            <a href="#" class="social-link">
+                <i class="fab fa-telegram"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fab fa-discord"></i>
+            </a>
+            <a href="#" class="social-link">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- Эффекты при наведении -->
+<div class="hover-effects">
+    <div class="effect effect-1"></div>
+    <div class="effect effect-2"></div>
+    <div class="effect effect-3"></div>
 </div>
 
 <script src="script.js"></script>
